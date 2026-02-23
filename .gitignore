@@ -1,0 +1,14 @@
+# Python / virtual environment
+venv/
+__pycache__/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+
+# Local secrets
+.env
+
+# Local databases or embeddings
+nextjs_chroma_db/
