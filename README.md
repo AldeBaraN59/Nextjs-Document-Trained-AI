@@ -1,4 +1,6 @@
 How to use:
+Front-End Installations:
+npm install react-markdown remark-gfm
 
 Setup Python Virutal Enviornment (venv): 
 i) python -m venv venv
