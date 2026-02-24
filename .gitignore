@@ -1,14 +1,22 @@
-# Python / virtual environment
-venv/
-__pycache__/
+# -----------------------------
+# Python backend
+# -----------------------------
+python-backend/venv/
+python-backend/__pycache__/
+python-backend/*.pyc
+python-backend/.env
+python-backend/nextjs_chroma_db/
 
-# Node / Next.js
-node_modules/
-.next/
-out/
+# -----------------------------
+# Next.js frontend
+# -----------------------------
+front-end/node_modules/
+front-end/.next/
+front-end/out/
+front-end/.env.local
 
-# Local secrets
-.env
-
-# Local databases or embeddings
-nextjs_chroma_db/
+# -----------------------------
+# OS files (Windows)
+# -----------------------------
+Thumbs.db
+.DS_Store

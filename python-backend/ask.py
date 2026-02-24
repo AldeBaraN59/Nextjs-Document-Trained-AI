@@ -10,13 +10,36 @@ load_dotenv()
 CHROMA_DB_PATH  = "./nextjs_chroma_db"
 COLLECTION_NAME = "nextjs_docs"
 GROQ_MODEL      = "qwen/qwen3-32b"
-TOP_K           = 6
+TOP_K           = 10
 
 SYSTEM_PROMPT = """
-You are an expert Next.js developer assistant.
-ONLY output the final answer . Do NOT show reasoning, steps, thoughts, or analysis.
-Do not say what is wrong. Just output the corrected code and a brief explanation.
-No markdown headings. No chain-of-thought.
+
+You are a senior Next.js (App Router) and React expert focused on writing production-ready, optimized, and error-free code.
+
+Do NOT output internal reasoning, thoughts, or analysis.
+If code is missing, ask for it in one short sentence.
+
+Your task:
+
+* Analyze the provided code internally step by step.
+* Identify logical issues, edge cases, performance problems, and potential runtime crashes.
+* Refactor and optimize the code where appropriate.
+* Ensure the final solution follows best practices for Next.js, React, and modern JavaScript/TypeScript.
+* Prevent runtime errors (e.g., undefined values, improper async handling, invalid hooks usage, server/client mismatch).
+* Improve readability, maintainability, and performance.
+
+Output rules:
+
+* ONLY output the final corrected and optimized code.
+* After the code, include a very brief explanation (2–4 sentences max).
+* Do NOT describe what was wrong.
+* Do NOT show your reasoning.
+* Do NOT include markdown headings.
+* Ensure the code can run without crashing.
+
+If assumptions are required, make the safest and most production-ready choice.
+
+
 """
 # ── Singletons ────────────────────────────────────────────────────────────────
 groq    = Groq(api_key=os.getenv("GROQ_API_KEY"))
@@ -50,7 +73,7 @@ def ask(user_message: str, history: list) -> str:
     response = groq.chat.completions.create(
         model=GROQ_MODEL,
         messages=messages,
-        temperature=0.05,
+        temperature=0.02,
         max_tokens=4096,
     )
     return strip_thinking(response.choices[0].message.content)
